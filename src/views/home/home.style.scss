@@ -1,0 +1,16 @@
+home {
+  .full-screen-show {
+    min-height: calc(100vh - 62px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .articles-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    padding: 2rem 0;
+  }
+}

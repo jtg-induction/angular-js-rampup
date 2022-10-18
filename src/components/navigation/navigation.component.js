@@ -1,10 +1,13 @@
 import angular from 'angular';
-import template from './navigation.tpl.html';
-import './navigation.scss';
+
+import controller from './navigation.controller';
+import template from './navigation.template.html';
+import './navigation.style.scss';
 
 export default angular
-  .module('navigation.component', [])
+  .module('navigation', [])
   .component('navigation', {
     template,
+    controller
   })
   .name;

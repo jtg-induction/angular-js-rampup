@@ -1,0 +1,65 @@
+<div class="login-container">
+  <div class="login-wrapper">
+    <div class="login-pic">
+      <img src="{{loginScreenImg}}" alt="login" />
+    </div>
+    <form
+      class="login-form validate-form"
+      name="loginForm"
+      ng-submit="submitForm()"
+      novalidate
+    >
+      <h3 class="login-form-title">Hey there, Please Login</h3>
+      <div
+        class="wrap-input validate-input"
+        data-validate="{{loginForm.email.$invalid && loginForm.email.$dirty ? 'Valid email is required: ex@abc.xyz' : '' }}"
+        ng-class="{'alert-validate': loginForm.email.$invalid && loginForm.email.$dirty }"
+      >
+        <input
+          class="input"
+          type="email"
+          name="email"
+          placeholder="Email"
+          ng-model="user.email"
+          ng-focus="apiError=''"
+          required
+        />
+        <span class="focus-input"></span>
+        <span class="symbol-input">
+          <i class="bi bi-envelope" aria-hidden="true"></i>
+        </span>
+      </div>
+
+      <div
+        class="wrap-input validate-input"
+        data-validate="{{loginForm.password.$invalid && loginForm.password.$dirty ? 'Please Enter at least 8 characters' : ''}}"
+        ng-class="{'alert-validate': loginForm.password.$invalid && loginForm.password.$dirty}"
+      >
+        <input
+          class="input"
+          type="password"
+          name="password"
+          placeholder="Password"
+          ng-minLength="8"
+          ng-model="user.password"
+          ng-focus="apiError=''"
+          required
+        />
+        <span class="focus-input"></span>
+        <span class="symbol-input">
+          <i class="bi bi-lock" aria-hidden="true"></i>
+        </span>
+      </div>
+      <p class="api-error">{{apiError}}</p>
+
+      <button
+        type="submit"
+        ng-disabled="isLoading || loginForm.emails.$invalid || loginForm.password.$invalid"
+        class="login-form-btn"
+      >
+        <div ng-show="isLoading" class="spinner-border" role="status"></div>
+        {{ !isLoading ? 'Login' : ''}}
+      </button>
+    </form>
+  </div>
+</div>

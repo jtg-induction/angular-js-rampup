@@ -1,0 +1,28 @@
+<div class="card" style="width: 25rem">
+  <div class="card-body">
+    <h5 class="card-title text-truncate">{{ $ctrl.article.title}}</h5>
+    <div class="mb-2">
+      <span
+        ng-repeat="tag in $ctrl.article.tagList"
+        class="badge bg-secondary mx-1"
+      >
+        {{tag}}
+      </span>
+    </div>
+    <p class="card-text text-truncate">{{$ctrl.article.description}}</p>
+    <div class="d-flex justify-content-between">
+      <div class="d-flex align-items-center">
+        <img
+          class="rounded-circle"
+          src="{{$ctrl.article.author.image}}"
+          height="20"
+          alt="img"
+        />
+        <p class="m-0 mx-1">{{$ctrl.article.author.username}}</p>
+      </div>
+      <a ui-sref="articleDetail({slug: $ctrl.article.slug})" class="card-link"
+        >View details</a
+      >
+    </div>
+  </div>
+</div>

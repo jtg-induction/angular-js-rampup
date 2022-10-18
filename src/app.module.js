@@ -1,33 +1,49 @@
 import angular from 'angular';
-import config from './common/config';
-
-import views from './views/views.module';
-import persistentComponents from './components/persistent-components.module';
-
+import 'bootstrap';
 import '@uirouter/angularjs';
 import 'angular-local-storage';
 
-import './common/app.scss';
+import services from '@Services';
+import components from './components';
+import views from './views';
+import constants from './common/constants';
+import './common/styles/main.scss';
+import routes from './app.routes';
+
+const appName = 'articleApp';
 
 angular
-  .module(config.appName, [
+  .module(appName, [
     views,
-    persistentComponents,
+    components,
+    constants,
+    services,
     'ui.router',
     'LocalStorageModule'
   ])
-  .config(['$stateProvider', '$locationProvider', ($stateProvider, $locationProvider) => {
-    Object.keys(config.stateUrls).forEach(stateKey => {
-      $stateProvider.state({
-        name: stateKey,
-        component: stateKey,
-        url: config.stateUrls[stateKey]
-      });
+  .config(routes)
+  .config(['$locationProvider', ($locationProvider) => {
+    $locationProvider.html5Mode(true);
+  }])
+  .run(['$rootScope', 'utilService', '$trace', '$transitions', ($rootScope, utilService, $trace, $transitions) => {
+    $rootScope.isLoggedIn = Boolean(utilService.getUser());
+
+    $trace.enable('TRANSITION'); // dev usage - to trace state changes
+
+    $transitions.onStart({ to: 'login' }, function (trans) {
+      if ($rootScope.isLoggedIn) {
+        return trans.router.stateService.target('home');
+      }
     });
 
-    $locationProvider.html5Mode(true);
+    $transitions.onStart({ to: 'home' }, function (trans) {
+      if (!$rootScope.isLoggedIn) {
+        return trans.router.stateService.target('login');
+      }
+    });
+
   }]);
 
 angular.element(document).ready(() => {
-  angular.bootstrap(document, [config.appName], { strictDi: true });
+  angular.bootstrap(document, [appName], { strictDi: true });
 });
