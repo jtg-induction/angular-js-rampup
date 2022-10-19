@@ -1,0 +1,19 @@
+<div class="home-page">
+  <div class="container">
+    <div ng-show="isLoading" class="full-screen-show">
+      <div class="spinner-border" role="status"></div>
+    </div>
+    <h3
+      class="full-screen-show m-0"
+      ng-show="!isLoading && (!articleData || !articleData.length)"
+    >
+      Nothing to show.
+    </h3>
+    <div ng-show="!isLoading && articleData.length" class="articles-wrap">
+      <article-card
+        ng-repeat="article in articleData"
+        article="article"
+      ></article-card>
+    </div>
+  </div>
+</div>

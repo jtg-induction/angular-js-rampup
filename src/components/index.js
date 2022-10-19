@@ -8,6 +8,6 @@ export default angular
   .module('components', [
     navigation,
     articleCard,
-    modal
+    modal,
   ])
   .name;

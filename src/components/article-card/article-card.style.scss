@@ -1,0 +1,11 @@
+@import "src/common/styles/main.scss";
+
+article-card {
+  .article-card {
+    width: 25rem;
+    height: 15rem;
+  }
+  .line-clamp {
+    @include line-clamp(4);
+  }
+}

@@ -6,6 +6,7 @@ import 'angular-local-storage';
 import services from '@Services';
 import components from './components';
 import views from './views';
+import directives from './directives';
 import constants from './common/constants';
 import './common/styles/main.scss';
 import routes from './app.routes';
@@ -18,6 +19,7 @@ angular
     components,
     constants,
     services,
+    directives,
     'ui.router',
     'LocalStorageModule'
   ])

@@ -8,9 +8,6 @@ export default angular
   .module('home', [])
   .component('home', {
     template,
-    bindings: {
-      article: '<'
-    },
     controller,
   })
   .name;

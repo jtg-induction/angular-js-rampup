@@ -4,6 +4,7 @@ export default ['$stateProvider', 'routeConstants', '$urlRouterProvider', ($stat
             name: stateKey,
             component: stateKey,
             url: routeConstants[stateKey],
+
         });
     });
     $urlRouterProvider.otherwise('/');

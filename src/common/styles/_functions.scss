@@ -1,3 +1,10 @@
 @function rem($pixels) {
   @return $pixels / $html-font-size * 1rem;
 }
+
+@mixin line-clamp($lines) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

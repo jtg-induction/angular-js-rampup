@@ -1,18 +1,55 @@
-<div class="container">
-  <div ng-show="isLoading" class="full-screen-show">
-    <div class="spinner-border" role="status"></div>
-  </div>
-  <h3
-    class="full-screen-show m-0"
-    ng-show="!isLoading && (!$ctrl.articleData || !$ctrl.articleData.length)"
-  >
-    Nothing to show.
-  </h3>
-  <div ng-show="!isLoading && $ctrl.articleData.length" class="articles-wrap">
-    <article-card
-      ng-repeat="article in $ctrl.articleData"
-      article="article"
-    ></article-card>
+<div class="home-page">
+  <div class="container">
+    <div class="input-group pt-4 search-input">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search text"
+        ng-model="searchText"
+      />
+      <button
+        class="btn btn-primary text-light"
+        type="button"
+        ng-click="filterBy('tag')"
+        ng-disabled="!searchText"
+      >
+        Filter by tag
+      </button>
+      <button
+        class="btn btn-secondary"
+        ng-click="filterBy('author')"
+        ng-disabled="!searchText"
+        type="button"
+      >
+        Filter by author
+      </button>
+      <button
+        ng-click="removeFilter()"
+        ng-disabled="!searchText"
+        class="btn btn-text"
+      >
+        Remove filter
+      </button>
+    </div>
+    <div ng-show="isLoading" class="full-screen-show">
+      <div class="spinner-border text-light" role="status"></div>
+    </div>
+    <h3
+      class="full-screen-show m-0"
+      ng-show="!isLoading && (!articleData || !articleData.length)"
+    >
+      Nothing to show.
+    </h3>
+    <div ng-show="!isLoading && articleData.length" class="articles-wrap">
+      <article-card
+        ng-repeat="article in articleData"
+        article="article"
+      ></article-card>
+    </div>
+    <pagination
+      on-change="handlePageChange"
+      page="home"
+      item-count="itemCount"
+    ></pagination>
   </div>
 </div>
-<modal></modal>

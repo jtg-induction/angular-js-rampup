@@ -1,7 +1,7 @@
 import angular from 'angular';
 
-import homeView from './home/home.view';
-import loginView from './login/login.view';
+import homeView from './home';
+import loginView from './login';
 
 export default angular
   .module('views', [
