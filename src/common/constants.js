@@ -1,12 +1,11 @@
 import angular from "angular";
-// import config from './config'
 
 export default angular.module('constants', [])
     .constant('routeConstants', {
         // keys should match view component names
         home: '/',
         login: '/login',
-        articleDetail: '/article/'
+        articleDetail: '/article/:slug'
     })
     .constant('apiConstants', {
         BASE_URL: 'https://api.realworld.io/api/',

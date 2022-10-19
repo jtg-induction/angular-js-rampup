@@ -41,7 +41,6 @@ const commonConfig = {
       "@Images": path.resolve(__dirname, "./src/common/assets/images"),
       "@Services": path.resolve(__dirname, "./src/services"),
       "@Common": path.resolve(__dirname, "./src/common"),
-      // "@Directives": path.resolve(__dirname, "../app/shared/directives"),
     },
   },
 };
