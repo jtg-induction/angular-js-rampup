@@ -52,7 +52,4 @@ export default ['$scope', 'articleService', 'localStorageService', function ($sc
         $scope.articleData = null;
     }
 
-
-    console.log($scope.searchText)
-
 }]
