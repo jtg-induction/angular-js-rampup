@@ -9,8 +9,5 @@ export default angular
     .component('articleDetail', {
         template,
         controller,
-        bindings: {
-            article: '='
-        },
     })
     .name;

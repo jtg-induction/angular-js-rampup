@@ -13,6 +13,12 @@
       <div class="modal-body" id="modal-body">
         <p>Modal body text goes here.</p>
       </div>
+      <div class="modal-footer d-none">
+        <button type="button" class="btn btn-primary" id="modal-button">
+          <div ng-show="isLoading" class="spinner-border" role="status"></div>
+          <span id="modal-button-text" ng-show="!isLoading">Confirm</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>

@@ -38,7 +38,7 @@ angular
       }
     });
 
-    $transitions.onStart({ to: 'home' }, function (trans) {
+    $transitions.onStart({ to: ['home', 'createArticle', 'articleDetail'] }, function (trans) {
       if (!$rootScope.isLoggedIn) {
         return trans.router.stateService.target('login');
       }

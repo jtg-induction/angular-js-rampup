@@ -4,7 +4,7 @@
     <div class="mb-3">
       <span
         ng-repeat="tag in $ctrl.article.tagList"
-        class="badge bg-secondary mx-1"
+        class="badge bg-secondary mx-1 mb-1"
       >
         {{tag}}
       </span>
@@ -20,7 +20,10 @@
         />
         <p class="m-0 mx-1">{{$ctrl.article.author.username}}</p>
       </div>
-      <a ui-sref="articleDetail({slug: $ctrl.article.slug})" class="card-link"
+      <a
+        ui-sref="articleDetail"
+        ng-click="setArticleSlug($ctrl.article.slug)"
+        class="card-link"
         >View details</a
       >
     </div>

@@ -1,6 +1,6 @@
 @import "src/common/styles/main.scss";
 
-home {
+article-detail {
   .full-screen-show {
     min-height: calc(100vh - 62px);
     display: flex;
@@ -8,14 +8,13 @@ home {
     justify-content: center;
   }
 
-  .articles-wrap {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 2rem 0;
+  .article-detail-wrap {
+    position: relative;
   }
 
-  .home-page {
-    background: $gradient-blue;
+  .delete-btn {
+    position: absolute;
+    right: -40px;
+    top: 1rem;
   }
 }
