@@ -12,6 +12,6 @@ export default angular.module('constants', [])
         BASE_URL: 'https://api.realworld.io/api/',
         LOGIN_URL: 'users/login',
         ARTICLES_URL: 'articles',
-
+        ARTICLE_LIMIT: 20,
     })
     .name;

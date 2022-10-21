@@ -10,7 +10,6 @@ export default ['$scope', '$state', 'articleService', 'modalService', 'utilServi
     const errorCallBack = () => {
         $scope.isLoading = false;
         $state.go('home');
-        // $scope.article = null;
     }
 
     const articleSlug = articleService.getArticleSlug();

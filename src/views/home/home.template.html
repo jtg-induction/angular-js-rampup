@@ -31,11 +31,9 @@
         Remove filter
       </button>
     </div>
-    <div ng-show="isLoading" class="full-screen-show">
-      <div class="spinner-border text-light" role="status"></div>
-    </div>
+    <loader ng-show="isLoading"></loader>
     <h3
-      class="full-screen-show m-0"
+      class="mt-4"
       ng-show="!isLoading && (!articleData || !articleData.length)"
     >
       Nothing to show.
@@ -49,7 +47,7 @@
     <pagination
       on-change="handlePageChange"
       page="home"
-      item-count="itemCount"
+      item-count="{{itemCount}}"
     ></pagination>
   </div>
 </div>

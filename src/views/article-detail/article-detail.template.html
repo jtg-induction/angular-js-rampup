@@ -1,20 +1,25 @@
-<div class="container py-3 pr-3 article-detail-wrap">
-  <div ng-show="isLoading" class="full-screen-show">
-    <div class="spinner-border" role="status"></div>
+<div class="article-detail-page">
+  <div class="container py-3 pr-3 article-detail-wrap">
+    <loader ng-show="isLoading"></loader>
+    <div class="title-wrap">
+      <h3>{{article.title}}</h3>
+      <button
+        ng-show="isMyArticle()"
+        ng-click="handleClick()"
+        class="btn btn-secondary"
+      >
+        <i class="bi bi-trash"></i>
+      </button>
+    </div>
+    <p>{{article.body}}</p>
+    <hr />
+    <p>{{article.description}}</p>
+    <h5>Tags</h5>
+    <span
+      ng-repeat="tag in article.tagList"
+      class="badge bg-secondary mx-1 mb-1"
+    >
+      {{tag}}
+    </span>
   </div>
-  <h3>{{article.title}}</h3>
-  <p>{{article.body}}</p>
-  <hr />
-  <p>{{article.description}}</p>
-  <h5>Tags</h5>
-  <span ng-repeat="tag in article.tagList" class="badge bg-secondary mx-1 mb-1">
-    {{tag}}
-  </span>
-  <button
-    ng-show="isMyArticle()"
-    ng-click="handleClick()"
-    class="btn btn-primary delete-btn"
-  >
-    <i class="bi bi-trash"></i>
-  </button>
 </div>

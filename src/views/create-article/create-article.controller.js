@@ -10,6 +10,7 @@ export default ['$scope', '$rootScope', 'articleService', 'utilService', '$state
         $scope.isLoading = true;
 
         $scope.article.tagList = typeof $scope.article.tagList === 'string' ? $scope.article.tagList.split(" ") : $scope.article.tagList;
+        console.log($scope.article);
 
         const successCallBack = () => {
             $scope.isLoading = false;

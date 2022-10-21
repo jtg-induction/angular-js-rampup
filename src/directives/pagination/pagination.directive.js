@@ -11,8 +11,8 @@ export default angular
             template,
             scope: {
                 onChange: '=',
-                page: '=',
-                itemCount: '=',
+                page: '@',
+                itemCount: '@',
             },
             controller: ['$scope', '$state', function ($scope, $state) {
 
@@ -28,6 +28,7 @@ export default angular
 
                 $scope.$watch('itemCount', (newVal) => {
                     $scope.itemCount = newVal;
+                    $scope.lastPage = Math.ceil($scope.itemCount / 20);
                 })
 
 

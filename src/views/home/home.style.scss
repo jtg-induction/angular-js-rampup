@@ -1,11 +1,19 @@
 @import "src/common/styles/main.scss";
 
 home {
-  .full-screen-show {
-    min-height: calc(100vh - 62px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .home-page {
+    background: $gradient-blue;
+    min-height: calc(100% - #{$header-height});
+  }
+
+  article-card {
+    width: 31%;
+    @media screen and (max-width: 1200px) {
+      width: 46.5%;
+    }
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
   }
 
   .articles-wrap {
@@ -13,11 +21,6 @@ home {
     flex-wrap: wrap;
     gap: 1rem;
     padding: 2rem 0;
-  }
-
-  .home-page {
-    background: $gradient-blue;
-    // height: calc(100% - 62px);
   }
 
   .search-input {

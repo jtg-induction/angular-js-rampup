@@ -1,17 +1,17 @@
-export default ['$scope', 'articleService', 'localStorageService', function ($scope, articleService, localStorageService) {
+export default ['$scope', 'articleService', 'localStorageService', 'apiConstants', function ($scope, articleService, localStorageService, apiConstants) {
 
     $scope.isLoading = true;
 
     $scope.searchText = localStorageService.get('tagSearchText') || localStorageService.get('authorSearchText');
 
     $scope.articleQueryParams = {
-        limit: 20,
+        limit: apiConstants.ARTICLE_LIMIT,
         tag: localStorageService.get('tagSearchText'),
         author: localStorageService.get('authorSearchText'),
     };
 
     $scope.handlePageChange = (pageValue) => {
-        $scope.articleQueryParams.offset = 20 * (pageValue - 1);
+        $scope.articleQueryParams.offset = apiConstants.ARTICLE_LIMIT * (pageValue - 1);
 
         articleService.getArticles(
             $scope.articleQueryParams

@@ -2,10 +2,13 @@
 
 article-card {
   .article-card {
-    width: 25rem;
-    height: 15rem;
+    min-height: 15rem;
+    height: 100%;
   }
   .line-clamp {
     @include line-clamp(4);
+  }
+  .tag {
+    max-width: 7rem;
   }
 }

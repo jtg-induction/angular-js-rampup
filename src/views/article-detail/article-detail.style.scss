@@ -1,20 +1,19 @@
 @import "src/common/styles/main.scss";
 
 article-detail {
-  .full-screen-show {
-    min-height: calc(100vh - 62px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .article-detail-page {
+    background: $gradient-blue;
+    min-height: calc(100% - #{$header-height});
   }
 
   .article-detail-wrap {
     position: relative;
   }
 
-  .delete-btn {
-    position: absolute;
-    right: -40px;
-    top: 1rem;
+  .title-wrap {
+    display: flex;
+    align-items: flex-start;
+    word-break: break-all;
+    gap: 1rem;
   }
 }
