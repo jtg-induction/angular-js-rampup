@@ -1,6 +1,6 @@
 import loginScreenImg from '@Images/login-screen.png';
 
-export default ['$scope', '$rootScope', 'articleService', 'utilService', '$state', 'modalService', function ($scope, $rootScope, articleService, utilService, $state, modalService) {
+export default ['$scope', '$rootScope', 'articleService', 'utilService', '$state', 'toastService', function ($scope, $rootScope, articleService, utilService, $state, toastService) {
 
     $scope.isLoading = false;
     $scope.loginScreenImg = loginScreenImg;
@@ -10,19 +10,19 @@ export default ['$scope', '$rootScope', 'articleService', 'utilService', '$state
         $scope.isLoading = true;
 
         $scope.article.tagList = typeof $scope.article.tagList === 'string' ? $scope.article.tagList.split(" ") : $scope.article.tagList;
-        console.log($scope.article);
 
-        const successCallBack = () => {
+        const successCallBack = (response) => {
             $scope.isLoading = false;
-            modalService.setTitle(`Article Published`);
-            modalService.setBody('Your article has been saved successfully.')
-            modalService.show();
-            $state.go('home');
+
+            toastService.setToastMessage('Your article has been published successfully.')
+            toastService.show();
+
+            articleService.setArticleSlug(response.data.article.slug);
+            $state.go('articleDetail');
         }
 
-        const errorCallBack = (response) => {
+        const errorCallBack = () => {
             $scope.isLoading = false;
-            $scope.apiError = response.data.errors;
         }
 
         articleService.createArticle($scope.article).then(successCallBack, errorCallBack);

@@ -2,7 +2,6 @@
 
 home {
   .home-page {
-    background: $gradient-blue;
     min-height: calc(100% - #{$header-height});
   }
 
@@ -20,10 +19,10 @@ home {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    padding: 2rem 0;
+    padding: 0 0 2rem;
   }
 
   .search-input {
-    max-width: 40rem;
+    max-width: 30rem;
   }
 }

@@ -14,7 +14,6 @@ export default angular
                 topOffset: '@'
             },
             controller: ['$scope', ($scope) => {
-                console.log($scope.topOffset);
                 $('#loader').css('top', `${$scope.topOffset}px`);
             }]
         }

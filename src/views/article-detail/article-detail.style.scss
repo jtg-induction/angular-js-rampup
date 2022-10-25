@@ -2,7 +2,6 @@
 
 article-detail {
   .article-detail-page {
-    background: $gradient-blue;
     min-height: calc(100% - #{$header-height});
   }
 
@@ -13,6 +12,7 @@ article-detail {
   .title-wrap {
     display: flex;
     align-items: flex-start;
+    justify-content: space-between;
     word-break: break-all;
     gap: 1rem;
   }

@@ -21,7 +21,6 @@
           name="email"
           placeholder="Email"
           ng-model="user.email"
-          ng-focus="apiError=''"
           required
         />
         <span class="focus-input"></span>
@@ -42,7 +41,6 @@
           placeholder="Password"
           ng-minLength="8"
           ng-model="user.password"
-          ng-focus="apiError=''"
           required
         />
         <span class="focus-input"></span>
@@ -50,8 +48,6 @@
           <i class="bi bi-lock" aria-hidden="true"></i>
         </span>
       </div>
-      <p class="api-error">{{apiError}}</p>
-
       <button
         type="submit"
         ng-disabled="isLoading || loginForm.emails.$invalid || loginForm.password.$invalid"

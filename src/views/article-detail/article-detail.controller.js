@@ -1,4 +1,4 @@
-export default ['$scope', '$state', 'articleService', 'modalService', 'utilService', function ($scope, $state, articleService, modalService, utilService) {
+export default ['$scope', '$state', 'articleService', 'modalService', 'utilService', 'toastService', function ($scope, $state, articleService, modalService, utilService, toastService) {
 
     $scope.isLoading = true;
 
@@ -19,13 +19,15 @@ export default ['$scope', '$state', 'articleService', 'modalService', 'utilServi
         articleService.getArticle(articleSlug).then(successCallBack, errorCallBack);
     }
 
+    $scope.$on('$destroy', () => {
+        articleService.resetArticleSlug();
+    });
+
     const deleteArticle = (modalCallBack) => {
         articleService.deleteArticle(articleSlug).then(() => {
             modalCallBack();
-            modalService.setTitle(`Success`);
-            modalService.setBody('Article deleted successfully');
-            modalService.hideConfirmButton();
-            modalService.show();
+            toastService.setToastMessage('Article deleted successfully');
+            toastService.show();
             $state.go('home');
         }, () => {
             modalCallBack();

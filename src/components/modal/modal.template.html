@@ -14,8 +14,17 @@
         <p>Modal body text goes here.</p>
       </div>
       <div class="modal-footer d-none">
-        <button type="button" class="btn btn-primary" id="modal-button">
-          <div ng-show="isLoading" class="spinner-border" role="status"></div>
+        <button
+          type="button"
+          class="btn btn-primary"
+          style="min-width: 100px"
+          id="modal-button"
+        >
+          <div
+            ng-show="isLoading"
+            class="spinner-border spinner-border-sm"
+            role="status"
+          ></div>
           <span id="modal-button-text" ng-show="!isLoading">Confirm</span>
         </button>
       </div>

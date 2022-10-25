@@ -10,6 +10,7 @@ export default {
         }
         this.deleteUser = () => {
             localStorageService.remove('user');
+            localStorageService.clearAll();
         }
     }]
 }

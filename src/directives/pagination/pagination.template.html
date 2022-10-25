@@ -36,11 +36,21 @@
         >{{pageIndex + 2}}</a
       >
     </li>
+    <li class="page-item" ui-sref-active="active">
+      <a class="page-link" ui-sref="{{page}}({page: pageIndex + 3})"
+        >{{pageIndex + 3}}</a
+      >
+    </li>
+    <li class="page-item" ui-sref-active="active">
+      <a class="page-link" ui-sref="{{page}}({page: pageIndex + 4})"
+        >{{pageIndex + 4}}</a
+      >
+    </li>
     <li class="page-item">
       <a
         class="page-link"
         href="#"
-        ng-click="pageIndex = min(lastPage, pageIndex + 1)"
+        ng-click="pageIndex = pageIndex + 4 < lastPage ? pageIndex + 1 : pageIndex"
         aria-label="Next"
       >
         <span aria-hidden="true">&raquo;</span>
