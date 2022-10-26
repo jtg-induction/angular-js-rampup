@@ -17,6 +17,11 @@ export default ['$scope', '$state', 'articleService', 'modalService', 'utilServi
 
     if (articleSlug) {
         articleService.getArticle(articleSlug).then(successCallBack, errorCallBack);
+    } else {
+        $scope.isLoading = false;
+        toastService.setToastMessage('Article not found');
+        toastService.show({ error: true });
+        $state.go('home');
     }
 
     $scope.$on('$destroy', () => {
