@@ -16,4 +16,9 @@ article-card {
   .tag {
     max-width: 7rem;
   }
+
+  .more-tag {
+    color: $disabled-color;
+    font-size: 14px;
+  }
 }
