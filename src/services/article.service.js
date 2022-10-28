@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export default {
   name: "articleService",
   service: [
@@ -9,7 +11,7 @@ export default {
     "toastService",
     function ($http, apiConstants, utilService, localStorageService, $q, toastService) {
 
-      $http.defaults.headers.common.Authorization = utilService.getUser()
+      $http.defaults.headers.common.Authorization = !_.isEmpty(utilService.getUser())
         ? `Bearer ${utilService.getUser().token}`
         : undefined;
       $http.defaults.headers.common.Accept = "application/json; charset=utf-8";

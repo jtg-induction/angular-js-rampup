@@ -2,6 +2,7 @@ import angular from "angular";
 import "bootstrap";
 import "@uirouter/angularjs";
 import "angular-local-storage";
+import _ from 'lodash';
 
 import services from "@Services";
 import components from "./components";
@@ -37,7 +38,7 @@ angular
     "$transitions",
     ($rootScope, utilService, $trace, $transitions) => {
 
-      $rootScope.isLoggedIn = Boolean(utilService.getUser());
+      $rootScope.isLoggedIn = !_.isEmpty(utilService.getUser());
 
       $trace.enable("TRANSITION"); // dev usage - to trace state changes
 
