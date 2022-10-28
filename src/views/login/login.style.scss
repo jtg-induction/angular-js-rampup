@@ -3,13 +3,12 @@
 login {
   .login-container {
     width: 100%;
-    height: calc(100vh - 62px);
+    height: calc(100vh - #{$header-height});
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    background: $gradient-blue;
   }
 
   .login-wrapper {
@@ -48,7 +47,7 @@ login {
     position: relative;
     width: 100%;
     z-index: 1;
-    margin-bottom: 10px;
+    margin-bottom: rem(10);
   }
 
   .input {
@@ -119,16 +118,6 @@ login {
   .input:focus + .focus-input + .symbol-input {
     color: $gradient-blue;
     padding-left: 28px;
-  }
-
-  .api-error {
-    min-height: 1.25rem;
-    margin: 0;
-    font-size: 14px;
-    color: $error;
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 25px;
   }
 
   /*------------------------------------------------------------------

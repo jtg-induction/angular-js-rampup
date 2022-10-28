@@ -1,0 +1,19 @@
+@import "src/common/styles/main.scss";
+
+article-detail {
+  .article-detail-page {
+    min-height: calc(100% - #{$header-height});
+  }
+
+  .article-detail-wrap {
+    position: relative;
+  }
+
+  .title-wrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    word-break: break-all;
+    gap: 1rem;
+  }
+}

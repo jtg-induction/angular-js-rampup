@@ -1,0 +1,7 @@
+@import "src/common/styles/main.scss";
+
+toast {
+  .error {
+    border: 1px solid $error;
+  }
+}

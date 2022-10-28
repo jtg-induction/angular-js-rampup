@@ -1,0 +1,23 @@
+<div class="d-flex align-items-center">
+  <p class="m-0 me-2 flex-shrink-0">{{label}}</p>
+  <form name="filterForm" novalidate class="input-group search-input m-0">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search text"
+      name="searchInput"
+      ng-model="searchText"
+      required
+    />
+    <button class="btn btn-secondary" ng-click="submitForm()" type="submit">
+      <i class="bi bi-funnel"></i>
+    </button>
+    <button
+      ng-click="onRemoveFilter()"
+      ng-disabled="filterForm.searchInput.$error.required"
+      class="btn btn-text"
+    >
+      <i class="bi bi-arrow-clockwise"></i>
+    </button>
+  </form>
+</div>
