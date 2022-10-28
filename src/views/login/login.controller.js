@@ -21,8 +21,6 @@ export default ['$scope', '$rootScope', 'authService', 'utilService', '$state', 
 
         const errorCallBack = () => {
             $scope.isLoading = false;
-            $scope.apiError = 'Invalid email or password';
-            $scope.user.password = '';
         }
 
         authService.authenticateUser($scope.user).then(successCallBack, errorCallBack);

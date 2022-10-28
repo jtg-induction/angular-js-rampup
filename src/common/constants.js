@@ -5,11 +5,13 @@ export default angular.module('constants', [])
         // keys should match view component names
         home: '/?page',
         login: '/login',
-        articleDetail: '/article/:slug'
+        articleDetail: '/article',
+        createArticle: '/create'
     })
     .constant('apiConstants', {
         BASE_URL: 'https://api.realworld.io/api/',
         LOGIN_URL: 'users/login',
-        GET_ARTICLES_URL: 'articles',
+        ARTICLES_URL: 'articles',
+        ARTICLE_LIMIT: 20,
     })
     .name;

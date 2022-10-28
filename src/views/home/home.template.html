@@ -1,55 +1,42 @@
 <div class="home-page">
   <div class="container">
-    <div class="input-group pt-4 search-input">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Search text"
-        ng-model="searchText"
-      />
-      <button
-        class="btn btn-primary text-light"
-        type="button"
-        ng-click="filterBy('tag')"
-        ng-disabled="!searchText"
-      >
-        Filter by tag
-      </button>
-      <button
-        class="btn btn-secondary"
-        ng-click="filterBy('author')"
-        ng-disabled="!searchText"
-        type="button"
-      >
-        Filter by author
-      </button>
-      <button
-        ng-click="removeFilter()"
-        ng-disabled="!searchText"
-        class="btn btn-text"
-      >
-        Remove filter
-      </button>
+    <back-button class="pt-3 d-block"></back-button>
+    <div class="pt-3">
+      <h4>Filters</h4>
+      <div class="d-flex justify-content-between flex-wrap" style="gap: 1rem">
+        <filter
+          label="By Author"
+          search-text="authorSearchText"
+          on-filter-click="filterByAuthor"
+          on-remove-filter="removeAuthorFilter"
+        ></filter>
+        <filter
+          label="By Tag"
+          search-text="tagSearchText"
+          on-filter-click="filterByTag"
+          on-remove-filter="removeTagFilter"
+        ></filter>
+      </div>
+      <div class="pt-5">
+        <loader ng-show="isLoading"></loader>
+        <h3 ng-show="!isLoading && (!articleData || !articleData.length)">
+          Nothing to show.
+        </h3>
+        <div ng-show="!isLoading && articleData.length">
+          <h4>Feed</h4>
+          <div class="articles-wrap">
+            <article-card
+              ng-repeat="article in articleData"
+              article="article"
+            ></article-card>
+          </div>
+        </div>
+      </div>
+      <pagination
+        on-change="handlePageChange"
+        page="home"
+        item-count="{{itemCount}}"
+      ></pagination>
     </div>
-    <div ng-show="isLoading" class="full-screen-show">
-      <div class="spinner-border text-light" role="status"></div>
-    </div>
-    <h3
-      class="full-screen-show m-0"
-      ng-show="!isLoading && (!articleData || !articleData.length)"
-    >
-      Nothing to show.
-    </h3>
-    <div ng-show="!isLoading && articleData.length" class="articles-wrap">
-      <article-card
-        ng-repeat="article in articleData"
-        article="article"
-      ></article-card>
-    </div>
-    <pagination
-      on-change="handlePageChange"
-      page="home"
-      item-count="itemCount"
-    ></pagination>
   </div>
 </div>

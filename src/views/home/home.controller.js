@@ -1,43 +1,55 @@
-export default ['$scope', 'articleService', 'localStorageService', function ($scope, articleService, localStorageService) {
+export default ['$scope', 'articleService', 'localStorageService', 'apiConstants', function ($scope, articleService, localStorageService, apiConstants) {
 
     $scope.isLoading = true;
 
-    $scope.searchText = localStorageService.get('tagSearchText') || localStorageService.get('authorSearchText');
+    $scope.authorSearchText = localStorageService.get('authorSearchText');
+    $scope.tagSearchText = localStorageService.get('tagSearchText');
 
     $scope.articleQueryParams = {
-        limit: 20,
+        limit: apiConstants.ARTICLE_LIMIT,
         tag: localStorageService.get('tagSearchText'),
         author: localStorageService.get('authorSearchText'),
     };
 
     $scope.handlePageChange = (pageValue) => {
-        $scope.articleQueryParams.offset = 20 * (pageValue - 1);
+        $scope.articleQueryParams.offset = apiConstants.ARTICLE_LIMIT * (pageValue - 1);
 
         articleService.getArticles(
             $scope.articleQueryParams
         ).then(successCallBack, errorCallBack);
     }
 
-    $scope.filterBy = (filter) => {
-        if ($scope.searchText === undefined) {
-            return;
-        }
-        localStorageService.set(filter === 'author' ? 'authorSearchText' : 'tagSearchText', $scope.searchText);
-        localStorageService.remove(filter === 'tag' ? 'authorSearchText' : 'tagSearchText');
-        $scope.articleQueryParams.offset = undefined
-        $scope.articleQueryParams.tag = localStorageService.get('tagSearchText');
-        $scope.articleQueryParams.author = localStorageService.get('authorSearchText');
+    $scope.filterByAuthor = () => {
+        $scope.articleQueryParams.offset = undefined;
+        $scope.articleQueryParams.tag = $scope.tagSearchText;
+        $scope.articleQueryParams.author = $scope.authorSearchText;
         $scope.isLoading = true;
-        $scope.articleQueryParams[filter] = $scope.searchText || undefined;
+        articleService.getArticles($scope.articleQueryParams).then(successCallBack, errorCallBack);
+        localStorageService.set('authorSearchText', $scope.authorSearchText);
+    }
+
+    $scope.removeAuthorFilter = () => {
+        $scope.isLoading = true;
+        localStorageService.remove('authorSearchText');
+        $scope.articleQueryParams.author = undefined;
+        $scope.authorSearchText = '';
         articleService.getArticles($scope.articleQueryParams).then(successCallBack, errorCallBack);
     }
 
-    $scope.removeFilter = () => {
+    $scope.filterByTag = () => {
+        $scope.articleQueryParams.offset = undefined;
+        $scope.articleQueryParams.author = $scope.authorSearchText;
+        $scope.articleQueryParams.tag = $scope.tagSearchText;
         $scope.isLoading = true;
-        localStorageService.remove('authorSearchText', 'tagSearchText');
-        $scope.articleQueryParams.tag = localStorageService.get('tagSearchText');
-        $scope.articleQueryParams.author = localStorageService.get('authorSearchText');
-        $scope.searchText = '';
+        articleService.getArticles($scope.articleQueryParams).then(successCallBack, errorCallBack);
+        localStorageService.set('tagSearchText', $scope.tagSearchText);
+    }
+
+    $scope.removeTagFilter = () => {
+        $scope.isLoading = true;
+        localStorageService.remove('tagSearchText');
+        $scope.articleQueryParams.tag = undefined;
+        $scope.tagSearchText = '';
         articleService.getArticles($scope.articleQueryParams).then(successCallBack, errorCallBack);
     }
 

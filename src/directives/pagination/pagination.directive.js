@@ -1,40 +1,48 @@
-import angular from 'angular';
+import angular from "angular";
 
-import template from './pagination.template.html';
-import './pagination.style.scss'
+import template from "./pagination.template.html";
+import "./pagination.style.scss";
 
 export default angular
-    .module('pagination', [])
-    .directive('pagination', function () {
+    .module("pagination", [])
+    .directive("pagination", function () {
         return {
-            restrict: 'E',
+            restrict: "E",
             template,
             scope: {
-                onChange: '=',
-                page: '=',
-                itemCount: '=',
+                onChange: "=",
+                page: "@",
+                itemCount: "@",
             },
-            controller: ['$scope', '$state', function ($scope, $state) {
+            controller: [
+                "$scope",
+                "$state",
+                "localStorageService",
+                "apiConstants",
+                function ($scope, $state, localStorageService, apiConstants) {
+                    $scope.pageIndex = localStorageService.get("pageIndex") || 1;
 
-                $scope.pageIndex = Number($state.params.page || 1);
+                    $scope.currentPageNumber = Number($state.params.page || 1);
 
-                $scope.currentPageNumber = $scope.pageIndex;
+                    $scope.$watch("currentPageNumber", (newValue) => {
+                        $scope.onChange(newValue);
+                    });
 
-                $scope.$watch('currentPageNumber', (newValue) => {
+                    $scope.$watch("pageIndex", (newValue) => {
+                        localStorageService.set("pageIndex", newValue);
+                    });
 
-                    $scope.onChange(newValue);
+                    $scope.$watch("itemCount", (newVal) => {
+                        $scope.itemCount = newVal;
+                        $scope.lastPage = Math.ceil(
+                            $scope.itemCount / apiConstants.ARTICLE_LIMIT
+                        );
+                    });
 
-                });
-
-                $scope.$watch('itemCount', (newVal) => {
-                    $scope.itemCount = newVal;
-                })
-
-
-                $scope.max = Math.max;
-                $scope.min = Math.min;
-                $scope.ceil = Math.ceil;
-            }]
-        }
-    })
-    .name;
+                    $scope.max = Math.max;
+                    $scope.min = Math.min;
+                    $scope.ceil = Math.ceil;
+                },
+            ],
+        };
+    }).name;

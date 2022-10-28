@@ -1,13 +1,18 @@
 <div class="card article-card">
   <div class="card-body d-flex flex-column">
     <h5 class="card-title text-truncate">{{ $ctrl.article.title}}</h5>
-    <div class="mb-3">
+    <div class="mb-3 d-flex flex-wrap">
       <span
-        ng-repeat="tag in $ctrl.article.tagList"
-        class="badge bg-secondary mx-1"
+        ng-repeat="tag in $ctrl.article.tagList.slice(0,3)"
+        class="badge bg-secondary mx-1 mb-1 text-truncate tag"
       >
         {{tag}}
       </span>
+      <span
+        class="more-tag mx-1"
+        ng-show="$ctrl.article.tagList.slice(3).length > 0"
+        >+ {{$ctrl.article.tagList.slice(3).length}} more</span
+      >
     </div>
     <p class="card-text line-clamp">{{$ctrl.article.description}}</p>
     <div class="d-flex justify-content-between mt-auto">
@@ -20,7 +25,10 @@
         />
         <p class="m-0 mx-1">{{$ctrl.article.author.username}}</p>
       </div>
-      <a ui-sref="articleDetail({slug: $ctrl.article.slug})" class="card-link"
+      <a
+        ui-sref="articleDetail"
+        ng-click="setArticleSlug($ctrl.article.slug)"
+        class="card-link"
         >View details</a
       >
     </div>

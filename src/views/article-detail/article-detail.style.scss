@@ -1,21 +1,19 @@
 @import "src/common/styles/main.scss";
 
-home {
-  .full-screen-show {
-    min-height: calc(100vh - 62px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+article-detail {
+  .article-detail-page {
+    min-height: calc(100% - #{$header-height});
   }
 
-  .articles-wrap {
+  .article-detail-wrap {
+    position: relative;
+  }
+
+  .title-wrap {
     display: flex;
-    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    word-break: break-all;
     gap: 1rem;
-    padding: 2rem 0;
-  }
-
-  .home-page {
-    background: $gradient-blue;
   }
 }
