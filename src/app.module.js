@@ -2,7 +2,8 @@ import angular from "angular";
 import "bootstrap";
 import "@uirouter/angularjs";
 import "angular-local-storage";
-import _ from 'lodash';
+import _ from "lodash";
+import restangular from "restangular";
 
 import services from "@Services";
 import components from "./components";
@@ -23,12 +24,18 @@ angular
     directives,
     "ui.router",
     "LocalStorageModule",
+    restangular,
   ])
   .config(routes)
   .config([
     "$locationProvider",
-    ($locationProvider) => {
+    "RestangularProvider",
+    "apiConstants",
+    ($locationProvider, RestangularProvider, apiConstants) => {
       $locationProvider.html5Mode(true);
+
+      RestangularProvider.setBaseUrl(apiConstants.BASE_URL);
+      RestangularProvider.setFullResponse(true);
     },
   ])
   .run([
@@ -37,7 +44,6 @@ angular
     "$trace",
     "$transitions",
     ($rootScope, utilService, $trace, $transitions) => {
-
       $rootScope.isLoggedIn = !_.isEmpty(utilService.getUser());
 
       $trace.enable("TRANSITION"); // dev usage - to trace state changes
@@ -59,6 +65,10 @@ angular
     },
   ]);
 
+/**
+ Manually start up the angular application by providing root module to
+ the document
+ */
 angular.element(document).ready(() => {
   angular.bootstrap(document, [appName], { strictDi: true });
 });

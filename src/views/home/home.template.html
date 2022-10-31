@@ -26,7 +26,7 @@
           <h4>Feed</h4>
           <div class="articles-wrap">
             <article-card
-              ng-repeat="article in articleData"
+              ng-repeat="article in articleData track by $index"
               article="article"
             ></article-card>
           </div>

@@ -1,28 +1,32 @@
-import _ from 'lodash';
+import _ from "lodash";
 
 export default {
   name: "articleService",
   service: [
-    "$http",
     "apiConstants",
     "utilService",
     "localStorageService",
     "$q",
     "toastService",
-    function ($http, apiConstants, utilService, localStorageService, $q, toastService) {
-
-      $http.defaults.headers.common.Authorization = !_.isEmpty(utilService.getUser())
-        ? `Bearer ${utilService.getUser().token}`
-        : undefined;
-      $http.defaults.headers.common.Accept = "application/json; charset=utf-8";
+    "Restangular",
+    function (
+      apiConstants,
+      utilService,
+      localStorageService,
+      $q,
+      toastService,
+      Restangular
+    ) {
+      if (!_.isEmpty(utilService.getUser())) {
+        Restangular.setDefaultHeaders({
+          Authorization: `Bearer ${utilService.getUser().token}`,
+          Accept: "application/json; charset=utf-8",
+        });
+      }
 
       this.getArticles = (queryParams) => {
-        const request = {
-          method: "GET",
-          url: `${apiConstants.BASE_URL}${apiConstants.ARTICLES_URL}`,
-          params: Object.assign({ limit: 10 }, queryParams),
-        };
-        return $http(request)
+        return Restangular.one(apiConstants.ARTICLES_URL)
+          .get(Object.assign({ limit: 10 }, queryParams))
           .then((resp) => $q.resolve(resp))
           .catch((resp) => {
             toastService.show({ error: true });
@@ -31,11 +35,8 @@ export default {
       };
 
       this.getArticle = (slug) => {
-        const request = {
-          method: "GET",
-          url: `${apiConstants.BASE_URL}${apiConstants.ARTICLES_URL}/${slug}`,
-        };
-        return $http(request)
+        return Restangular.one(apiConstants.ARTICLES_URL, slug)
+          .get()
           .then((resp) => $q.resolve(resp))
           .catch((resp) => {
             toastService.show({ error: true });
@@ -44,14 +45,8 @@ export default {
       };
 
       this.createArticle = (data) => {
-        const request = {
-          method: "POST",
-          url: `${apiConstants.BASE_URL}${apiConstants.ARTICLES_URL}`,
-          data: {
-            article: data,
-          },
-        };
-        return $http(request)
+        return Restangular.all(apiConstants.ARTICLES_URL)
+          .post(data)
           .then((resp) => $q.resolve(resp))
           .catch((resp) => {
             const errorMessage = `Title ${resp.data.errors.title.join(", ")}`;
@@ -62,11 +57,8 @@ export default {
       };
 
       this.deleteArticle = (slug) => {
-        const request = {
-          method: "DELETE",
-          url: `${apiConstants.BASE_URL}${apiConstants.ARTICLES_URL}/${slug}`,
-        };
-        return $http(request)
+        return Restangular.one(apiConstants.ARTICLES_URL, slug)
+          .remove()
           .then((resp) => $q.resolve(resp))
           .catch((resp) => {
             toastService.show({ error: true });
@@ -74,18 +66,17 @@ export default {
           });
       };
 
-      this.articleSlug;
-
+      /**
+       * As article slug can be large, we do not send it in the URL path
+       * and instead use a service to get the current article slug selected
+       */
       this.setArticleSlug = (slug) => {
-        this.articleSlug = slug;
         localStorageService.set("articleSlug", slug);
       };
 
-      this.getArticleSlug = () =>
-        this.articleSlug || localStorageService.get("articleSlug");
+      this.getArticleSlug = () => localStorageService.get("articleSlug");
 
       this.resetArticleSlug = () => {
-        this.articleSlug = undefined;
         localStorageService.remove("articleSlug");
       };
     },
